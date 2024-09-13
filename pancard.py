@@ -2,9 +2,10 @@ import cv2
 import numpy as np
 from pdf2image import convert_from_path
 import pytesseract
+import sys
+import ast
+import datetime
 
-pdf_file = 'Ankit_Pancard.pdf'
-pages = convert_from_path(pdf_file, poppler_path='/opt/homebrew/Cellar/poppler/24.04.0_1/bin')
 
 def remove_white_borders(image, tolerance=5):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -93,33 +94,7 @@ def extract_text_from_image(image):
     text = pytesseract.image_to_string(image)
     return text
 
-# Convert the first page to an image array
-page_image = np.array(pages[0])
 
-# Step 1: Remove white borders (with tolerance to avoid over-cropping)
-# image_no_borders = remove_white_borders(page_image)
-
-# Step 2: Convert blue background to white
-image_processed = convert_blue_to_white(page_image)
-
-# Step 3: Add padding before deskewing to prevent content loss
-image_with_padding = add_padding(image_processed)
-
-# Step 4: Deskew the image to correct alignment
-deskewed_image = deskew(image_with_padding)
-
-# Step 5: Enhance the text for better OCR
-enhanced_image = enhance_text(deskewed_image)
-
-
-# Step 6: Extract text
-text = extract_text_from_image(enhanced_image)
-
-# Print the extracted text
-# print(text)
-
-# Optional: Save the enhanced image for manual inspection
-cv2.imwrite("enhanced_image_with_padding.png", enhanced_image)
 
 
 def extract_regex(text):
@@ -129,19 +104,57 @@ def extract_regex(text):
     dob = re.findall(r'\b[0-9]{2}/[0-9]{2}/[0-9]{4}\b', text)
     return dob
     
-import datetime
-def check_age_requirement(dob):
+
+def check_age_requirement(dob, age_limit):
+    age_limit = int(age_limit)
     current_data = datetime.datetime.now()
     dob = datetime.datetime.strptime(dob, "%d/%m/%Y")
     #subtract two dates
-    if (current_data - dob).days/365.25 >= 18:
+    if (current_data - dob).days/365.25 >= age_limit:
         print("You are eligible")
     else:
         print("You are not eligible")
     
-
+def main():
+    data = ast.literal_eval(sys.argv[1])
+    agelimit = sys.argv[1] 
+    pdf_file = sys.argv[2]
+    pages = convert_from_path(pdf_file, poppler_path='/opt/homebrew/Cellar/poppler/24.04.0_1/bin')
     
-dob = extract_regex(text)
-check_age_requirement(dob[0])
+    # Convert the first page to an image array
+    page_image = np.array(pages[0])
+
+    # Step 1: Remove white borders (with tolerance to avoid over-cropping)
+    # image_no_borders = remove_white_borders(page_image)
+
+    # Step 2: Convert blue background to white
+    image_processed = convert_blue_to_white(page_image)
+
+    # Step 3: Add padding before deskewing to prevent content loss
+    image_with_padding = add_padding(image_processed)
+
+    # Step 4: Deskew the image to correct alignment
+    deskewed_image = deskew(image_with_padding)
+
+    # Step 5: Enhance the text for better OCR
+    enhanced_image = enhance_text(deskewed_image)
 
 
+    # Step 6: Extract text
+    text = extract_text_from_image(enhanced_image)
+
+    # Print the extracted text
+    # print(text)
+
+    # Optional: Save the enhanced image for manual inspection
+    cv2.imwrite("enhanced_image_with_padding.png", enhanced_image)
+    
+    dob = extract_regex(text)
+    check_age_requirement(dob[0], age_limit=agelimit)
+    
+    
+
+
+
+if __name__ == "__main__":
+    main()

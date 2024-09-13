@@ -45,7 +45,9 @@ def submit():
     '''   
     if document_type == 'PAN Card':
         if selected_option == 'age':
-            result = subprocess.run(['python', 'pancard.py', age_limit], capture_output=True, text=True)
+            age_limit_str = str(age_limit)
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+            result = subprocess.run(['python', 'pancard.py', age_limit_str, file_path], capture_output=True, text=True)
             print(result.stdout)
             
         
