@@ -127,6 +127,21 @@ def extract_regex(text):
     # number  = re.findall(r'[^A-Z0-9]*?([A-Z]{5,6}\d{3}[A-Z])$', text)
     # print("PAN Number: ", number)
     dob = re.findall(r'\b[0-9]{2}/[0-9]{2}/[0-9]{4}\b', text)
-    print("DOB: ", dob)
+    return dob
     
-extract_regex(text)
+import datetime
+def check_age_requirement(dob):
+    current_data = datetime.datetime.now()
+    dob = datetime.datetime.strptime(dob, "%d/%m/%Y")
+    #subtract two dates
+    if (current_data - dob).days/365.25 >= 18:
+        print("You are eligible")
+    else:
+        print("You are not eligible")
+    
+
+    
+dob = extract_regex(text)
+check_age_requirement(dob[0])
+
+
