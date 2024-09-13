@@ -18,83 +18,102 @@
         <div class="division division-left">
             <!-- Subdivision 1: Document Options -->
             <div class="subdivision">
-              <p>What document do you want to upload:</p>
+                <p>What document do you want to upload:</p>
           
-              <label for="aadharBtn">
-                  <input type="radio" id="aadharBtn" name="document" value="Aadhar Card">
-                  Aadhar Card
-              </label>
+                <label for="aadharBtn">
+                    <input type="radio" id="aadharBtn" name="document" value="Aadhar Card">
+                    Aadhar Card
+                </label>
           
-              <label for="panBtn">
-                  <input type="radio" id="panBtn" name="document" value="PAN Card">
-                  PAN Card
-              </label>
+                <label for="panBtn">
+                    <input type="radio" id="panBtn" name="document" value="PAN Card">
+                    PAN Card
+                </label>
           
-              <label for="vaccineBtn">
-                  <input type="radio" id="vaccineBtn" name="document" value="Covid-19 Vaccination Certificate">
-                  Covid-19 Vaccination Certificate
-              </label>
-          </div>
+                <label for="vaccineBtn">
+                    <input type="radio" id="vaccineBtn" name="document" value="Covid-19 Vaccination Certificate">
+                    Covid-19 Vaccination Certificate
+                </label>
+            </div>
           
-          <!-- Subdivisions for the radio button-specific dropdowns -->
-          <div class="subdivision" id="aadharDropdown" style="display: none;">
-              <p>Aadhar Card Options:</p>
-              <select>
-                  <option value="age">Age Verification</option>
-                  <option value="address">Address Verification</option>
-                  <option value="aadharNumber">Valid Aadhar Number</option>
-              </select>
-          </div>
+            <!-- Subdivisions for the radio button-specific dropdowns -->
+            <div class="subdivision" id="aadharDropdown" style="display: none;">
+                <p>Aadhar Card Options:</p>
+                <select id="aadharOptions">
+                    <option value="select">Select an option</option>
+                    <option value="age">Age Verification</option>
+                    <option value="address">Address Verification</option>
+                    <option value="aadharNumber">Valid Aadhar Number</option>
+                </select>
+            </div>
           
-          <div class="subdivision" id="panDropdown" style="display: none;">
-              <p>PAN Card Options:</p>
-              <select>
-                  <option value="age">Age Verification</option>
-                  <option value="citizenship">Citizenship Verification</option>
-              </select>
-          </div>
+            <div class="subdivision" id="panDropdown" style="display: none;">
+                <p>PAN Card Options:</p>
+                <select id="panOptions">
+                    <option value="select">Select an option</option>
+                    <option value="age">Age Verification</option>
+                    <option value="address">Address Verification</option>
+                </select>
+            </div>
           
-          <div class="subdivision" id="vaccineDropdown" style="display: none;">
-              <p>Covid-19 Vaccination Certificate Options:</p>
-              <select>
-                  <option value="vaccineVerification">Verify Covid-19 Vaccine</option>
-              </select>
-          </div>          
+            <div class="subdivision" id="vaccineDropdown" style="display: none;">
+                <p>Covid-19 Vaccination Certificate Options:</p>
+                <select id="vaccineOptions">
+                    <option value="vaccineVerification">Verify Covid-19 Vaccine</option>
+                </select>
+            </div>          
 
             <!-- Subdivision 2: Upload Option -->
             <div class="subdivision">
                 <p>Upload your document:</p>
                 <input type="file" id="uploadInput" accept=".pdf,.jpg,.png">
             </div>
-<!--
-            <div class="dropdown-menu d-block position-static rounded-4 shadow overflow-hidden custom-width" data-bs-theme="dark">
-                <form class="p-2 mb-2 bg-dark border-bottom border-dark">
-                  <input type="search" class="form-control bg-dark" autocomplete="false" placeholder="Choose document . .">
-                </form>
-                <ul class="list-unstyled mb-0">
-                  <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
-                    <span class="d-inline-block bg-success rounded-circle p-1"></span>
-                    Age verification
-                  </a></li>
-                  <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
-                    <span class="d-inline-block bg-primary rounded-circle p-1"></span>
-                    Aadhar verification
-                  </a></li>
-                  <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
-                    <span class="d-inline-block bg-danger rounded-circle p-1"></span>
-                    Pan verification
-                  </a></li>
-                  <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
-                    <span class="d-inline-block bg-info rounded-circle p-1"></span>
-                    COVID Vaccince verification
-                  </a></li>
-                </ul>
-        </div>
-      -->
-            <!-- Subdivision 4: Age Limit -->
-            <div class="subdivision">
+
+            <!-- Subdivision 4: Age Limit (hidden by default) -->
+            <div class="subdivision" id="ageLimitDiv" style="display: none;">
                 <p>Enter Age Limit (18 or 21):</p>
                 <input type="text" id="ageLimit" placeholder="Type 18 or 21">
+            </div>
+
+            <!-- Subdivision 5: Address Verification State Dropdown (hidden by default) -->
+            <div class="subdivision" id="stateDropdownDiv" style="display: none;">
+                <p>Select your State:</p>
+                <select id="stateDropdown">
+                    <option value="select">Select a state</option>
+                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                    <option value="Assam">Assam</option>
+                    <option value="Bihar">Bihar</option>
+                    <option value="Chhattisgarh">Chhattisgarh</option>
+                    <option value="Goa">Goa</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Haryana">Haryana</option>
+                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                    <option value="Jharkhand">Jharkhand</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Kerala">Kerala</option>
+                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Manipur">Manipur</option>
+                    <option value="Meghalaya">Meghalaya</option>
+                    <option value="Mizoram">Mizoram</option>
+                    <option value="Nagaland">Nagaland</option>
+                    <option value="Odisha">Odisha</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Sikkim">Sikkim</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Telangana">Telangana</option>
+                    <option value="Tripura">Tripura</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="Uttarakhand">Uttarakhand</option>
+                    <option value="West Bengal">West Bengal</option>
+                </select>
+            </div>
+
+            <!-- Button to submit the form -->
+            <div class="subdivision">
+                <button id="submitBtn" class="btn btn-primary">Submit</button>
             </div>
         </div>
 
@@ -105,6 +124,63 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // Function to show the respective dropdown when a document option is selected
+        document.querySelectorAll('input[name="document"]').forEach(function(elem) {
+            elem.addEventListener('change', function() {
+                document.getElementById('aadharDropdown').style.display = 'none';
+                document.getElementById('panDropdown').style.display = 'none';
+                document.getElementById('vaccineDropdown').style.display = 'none';
+                document.getElementById('ageLimitDiv').style.display = 'none'; // Hide the age limit field
+                document.getElementById('stateDropdownDiv').style.display = 'none'; // Hide the state dropdown field
+                
+                if (this.value === 'Aadhar Card') {
+                    document.getElementById('aadharDropdown').style.display = 'block';
+                } else if (this.value === 'PAN Card') {
+                    document.getElementById('panDropdown').style.display = 'block';
+                } else if (this.value === 'Covid-19 Vaccination Certificate') {
+                    document.getElementById('vaccineDropdown').style.display = 'block';
+                }
+            });
+        });
+
+        // Function to show age limit input field or state dropdown if corresponding verification is selected
+        function toggleFields(optionId) {
+            document.getElementById(optionId).addEventListener('change', function() {
+                if (this.value === 'age') {
+                    document.getElementById('ageLimitDiv').style.display = 'block';
+                    document.getElementById('stateDropdownDiv').style.display = 'none'; // Hide the state dropdown field
+                } else if (this.value === 'address') {
+                    document.getElementById('stateDropdownDiv').style.display = 'block';
+                    document.getElementById('ageLimitDiv').style.display = 'none'; // Hide the age limit field
+                } else {
+                    document.getElementById('ageLimitDiv').style.display = 'none';
+                    document.getElementById('stateDropdownDiv').style.display = 'none';
+                }
+            });
+        }
+
+        toggleFields('aadharOptions');
+        toggleFields('panOptions');
+
+        // Function to handle form submission
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            const documentType = document.querySelector('input[name="document"]:checked');
+            const ageLimitInput = document.getElementById('ageLimit').value;
+            const selectedOption = (documentType && documentType.value === 'Aadhar Card') 
+                                    ? document.getElementById('aadharOptions').value 
+                                    : document.getElementById('panOptions').value;
+            const selectedState = document.getElementById('stateDropdown').value;
+
+            if (selectedOption === 'age' && ageLimitInput === '') {
+                alert('Please enter the age limit.');
+            } else if (selectedOption === 'address' && selectedState === 'select') {
+                alert('Please select a state for Address Verification.');
+            } else {
+                alert('Form submitted successfully!');
+                // Additional form submission logic goes here
+            }
+        });
+    </script>
 </body>
 </html>
