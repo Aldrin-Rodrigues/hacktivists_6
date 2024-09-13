@@ -18,18 +18,55 @@
         <div class="division division-left">
             <!-- Subdivision 1: Document Options -->
             <div class="subdivision">
-                <p>What document you want to upload:</p>
-                <button id="aadharBtn">Aadhar Card (PDF)</button>
-                <button id="panBtn">PAN Card</button>
-                <button id="vaccineBtn">Covid-19 Vaccination Certificate</button>
-            </div>
+              <p>What document do you want to upload:</p>
+          
+              <label for="aadharBtn">
+                  <input type="radio" id="aadharBtn" name="document" value="Aadhar Card">
+                  Aadhar Card
+              </label>
+          
+              <label for="panBtn">
+                  <input type="radio" id="panBtn" name="document" value="PAN Card">
+                  PAN Card
+              </label>
+          
+              <label for="vaccineBtn">
+                  <input type="radio" id="vaccineBtn" name="document" value="Covid-19 Vaccination Certificate">
+                  Covid-19 Vaccination Certificate
+              </label>
+          </div>
+          
+          <!-- Subdivisions for the radio button-specific dropdowns -->
+          <div class="subdivision" id="aadharDropdown" style="display: none;">
+              <p>Aadhar Card Options:</p>
+              <select>
+                  <option value="age">Age Verification</option>
+                  <option value="address">Address Verification</option>
+                  <option value="aadharNumber">Valid Aadhar Number</option>
+              </select>
+          </div>
+          
+          <div class="subdivision" id="panDropdown" style="display: none;">
+              <p>PAN Card Options:</p>
+              <select>
+                  <option value="age">Age Verification</option>
+                  <option value="citizenship">Citizenship Verification</option>
+              </select>
+          </div>
+          
+          <div class="subdivision" id="vaccineDropdown" style="display: none;">
+              <p>Covid-19 Vaccination Certificate Options:</p>
+              <select>
+                  <option value="vaccineVerification">Verify Covid-19 Vaccine</option>
+              </select>
+          </div>          
 
             <!-- Subdivision 2: Upload Option -->
             <div class="subdivision">
                 <p>Upload your document:</p>
                 <input type="file" id="uploadInput" accept=".pdf,.jpg,.png">
             </div>
-
+<!--
             <div class="dropdown-menu d-block position-static rounded-4 shadow overflow-hidden custom-width" data-bs-theme="dark">
                 <form class="p-2 mb-2 bg-dark border-bottom border-dark">
                   <input type="search" class="form-control bg-dark" autocomplete="false" placeholder="Choose document . .">
@@ -53,7 +90,7 @@
                   </a></li>
                 </ul>
         </div>
-
+      -->
             <!-- Subdivision 4: Age Limit -->
             <div class="subdivision">
                 <p>Enter Age Limit (18 or 21):</p>

@@ -1,11 +1,19 @@
-/* General Style */
+/* body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    background-image: url('bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}  */
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
 }
 
-/* Header */
 header {
     background-color: black;
     color: white;
@@ -24,9 +32,15 @@ header {
 .division {
     border: 1px solid black;
     padding: 20px;
-    width: 48%;                /* Make each division take up 48% of the container */
-    box-sizing: border-box;     /* Include padding in width calculation */
-    background-color: white;    /* Add background for visibility */
+    width: 48%;               
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    background-image: url('bg.jpg.png'); /* Set background image for divisions */
+    background-size: cover;         /* Ensure the image covers the division */
+    background-position: center;    /* Center the background image in the division */
+    background-repeat: no-repeat;   /* Prevent image from repeating */
+    border-radius: 10px;            /* Optional: rounded corners */
+    background-color: white; 
 }
 
 /* Subdivisions */
@@ -39,6 +53,15 @@ button {
     padding: 10px;
     margin-right: 10px;
     cursor: pointer;
+    border-radius: 100px;
+    border: 1px solid #ccc;
+    background-color: #000000;
+    transition: background-color 0.3s;
+    color: #f4f4f4;
+}
+
+button:hover {
+    background-color: #4a4a4a; /* Changes background color on hover */
 }
 
 /* Inputs */
@@ -67,9 +90,4 @@ iframe {
     .division {
         width: 100%;           /* Make divisions full-width on small screens */
     }
-}
-
-
-custom-width {
-    
 }
