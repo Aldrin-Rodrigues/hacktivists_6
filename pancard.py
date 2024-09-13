@@ -152,9 +152,24 @@ def main():
     dob = extract_regex(text)
     check_age_requirement(dob[0], age_limit=agelimit)
     
-    
-
-
 
 if __name__ == "__main__":
     main()
+
+import oauthlib
+import requests
+import json
+
+url = "https://production.deepvue.tech/v1/verification/panbasic?pan_number=CYOPA5817M"
+
+payload = {
+}
+headers = {
+  'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmcmVlX3RpZXJfcGVzMTIwMjIwMjI3MF9iYjVkM2VhMjY1IiwiZXhwIjoxNzI2Mjg3NzkwfQ.N9ady8ed2GYpteOqDZTqhNRAnvFa-oY0d8rMWdP4jsY' ,
+  'x-api-key': '3485849b7aea4c029ef90f166d96268f',
+  'Content-Type': 'application/json'
+}
+
+response = requests.request("GET", url, headers=headers, data=payload)
+
+print(response.text)
