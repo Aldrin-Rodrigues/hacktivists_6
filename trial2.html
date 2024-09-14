@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <h1>Zero.</h1>
+        <h1>ZER0.</h1>
     </header>
 
     <div class="container">
@@ -66,7 +66,7 @@
             <!-- Subdivision 2: Upload Option -->
             <div class="subdivision">
                 <p>Upload your document:</p>
-                <input type="file" id="uploadInput" accept=".pdf,.jpg,.png">
+                <input type="file" id="uploadInput" accept=".pdf">
             </div>
 
             <!-- Subdivision 4: Age Limit (hidden by default) -->
@@ -181,6 +181,21 @@
                 // Additional form submission logic goes here
             }
         });
+
+                // Select the file input and the iframe for document preview
+        const uploadInput = document.getElementById('uploadInput');
+        const documentPreview = document.getElementById('documentPreview');
+
+        // Event listener for file upload input
+        uploadInput.addEventListener('change', function () {
+            const file = uploadInput.files[0];
+
+            if (file) {
+                const fileURL = URL.createObjectURL(file);
+                documentPreview.src = fileURL;
+            }
+        });
     </script>
+
 </body>
 </html>
