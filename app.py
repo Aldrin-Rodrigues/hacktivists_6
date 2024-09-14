@@ -33,17 +33,21 @@ def submit():
 
     if file:
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
-    '''
+
     if document_type == 'Aadhar Card':
         if selected_option == 'age':
-            subprocess.run(['python', 'age_verification_script.py', age_limit])
+            age_limit_str = str(age_limit)
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+            result = subprocess.run(['python', 'aadhar_final_age.py', age_limit_str, file_path], capture_output=True, text=True)
+            print(result.stdout)
         elif selected_option == 'address':
-            subprocess.run(['python', 'address_verification_script.py', selected_state])
-        elif selected_option == 'aadharNumber':
+            selected_state = str(selected_state)
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+            subprocess.run(['python', 'aadhar_final_address.py', selected_state, file_path])
+        # elif selected_option == 'aadharNumber':
             # subprocess.run(['python', 'aadhar_number_validation_script.py'])
-            pass
-    '''   
-    if document_type == 'PAN Card':
+
+    elif document_type == 'PAN Card':
         if selected_option == 'age':
             age_limit_str = str(age_limit)
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
