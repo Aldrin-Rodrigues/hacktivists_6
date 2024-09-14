@@ -209,7 +209,30 @@
                 }
             };
             xhr.send(formData);
-            
+        });
+
+        const uploadInput = document.getElementById('uploadInput');
+        const documentPreview = document.getElementById('documentPreview');
+
+        // Event listener for file upload input
+        uploadInput.addEventListener('change', function () {
+            const file = uploadInput.files[0];
+
+            if (file) {
+                // Create a URL for the file
+                const fileURL = URL.createObjectURL(file);
+
+                // Set the iframe source to the file URL
+                documentPreview.src = fileURL;
+
+                // Revoke the object URL after the file has been loaded to free up resources
+                documentPreview.onload = function() {
+                    URL.revokeObjectURL(fileURL);
+                };
+            } else {
+                // Clear the iframe if no file is selected
+                documentPreview.src = '';
+            }
         });
         
     </script>

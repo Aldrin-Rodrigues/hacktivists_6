@@ -13,6 +13,8 @@
 from flask import Flask, request, jsonify, render_template
 import os
 import subprocess
+import sys
+import requests
 
 app = Flask(__name__)
 
@@ -40,10 +42,12 @@ def submit():
             age_limit_str = str(age_limit)
             result = subprocess.run(['python', 'aadhar_final_age.py', age_limit_str, file_path], capture_output=True, text=True)
             print(result.stdout)
+            result_output = result.stdout
         elif selected_option == 'address':
             selected_state = str(selected_state)
             result = subprocess.run(['python', 'aadhar_final_address.py', selected_state, file_path], capture_output=True, text=True)
             print(result.stdout)
+            result_output = result.stdout
         # elif selected_option == 'aadharNumber':
             # subprocess.run(['python', 'aadhar_number_validation_script.py'])
 
@@ -52,6 +56,7 @@ def submit():
             age_limit_str = str(age_limit)
             result = subprocess.run(['python', 'pancard.py', age_limit_str, file_path], capture_output=True, text=True)
             print(result.stdout)
+            result_output = result.stdout
         
     # elif document_type == 'Covid-19 Vaccination Certificate':
     #     if selected_option == 'vaccineVerification':
@@ -66,6 +71,10 @@ def submit():
         'fileName': file.filename if file else None
     }
     
+    requests.post('http://localhost:5001/submit', json = {
+        'validity': result_output
+    })
+    
     print(response_data)
     return jsonify(response_data)
 
@@ -74,3 +83,10 @@ if __name__ == '__main__':
         os.makedirs(UPLOAD_FOLDER)
     app.run(debug=True)
 
+
+# @app.route('/submit', methods=['POST'])
+# def submit():
+#     # Sending the POST request to localhost:5001
+#     response = requests.post('http://localhost:5001/submit', data={'key1': 'value1', 'key2': 'value2'})
+#     print(response.text)
+#     return jsonify({'status': 'success', 'output': response.text})
