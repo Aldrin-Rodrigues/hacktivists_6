@@ -28,10 +28,10 @@
                     <input type="radio" id="panBtn" name="document" value="PAN Card">
                     PAN Card
                 </label>
-                <label for="vaccineBtn">
+                <!-- <label for="vaccineBtn">
                     <input type="radio" id="vaccineBtn" name="document" value="Covid-19 Vaccination Certificate">
                     Covid-19 Vaccination Certificate
-                </label>
+                </label> -->
             </div>
             
             <!-- Subdivisions for the radio button-specific dropdowns -->
@@ -41,7 +41,7 @@
                     <option value="select">Select an option</option>
                     <option value="age">Age Verification</option>
                     <option value="address">Address Verification</option>
-                    <option value="aadharNumber">Valid Aadhar Number</option>
+                    <!-- <option value="aadharNumber">Valid Aadhar Number</option> -->
                 </select>
             </div>
 
@@ -85,16 +85,16 @@
                 <select id="panOptions">
                     <option value="select">Select an option</option>
                     <option value="age">Age Verification</option>
-                    <option value="address">Address Verification</option>
+                    <!-- <option value="address">Address Verification</option> -->
                 </select>
             </div>
             
-            <div class="subdivision" id="vaccineDropdown" style="display: none;">
+            <!-- <div class="subdivision" id="vaccineDropdown" style="display: none;">
                 <p>Covid-19 Vaccination Certificate Options:</p>
                 <select id="vaccineOptions">
                     <option value="vaccineVerification">Verify Covid-19 Vaccine</option>
                 </select>
-            </div>          
+            </div>           -->
 
             <!-- Subdivision 2: Upload Option -->
             <div class="subdivision">
@@ -104,8 +104,8 @@
 
             <!-- Subdivision 4: Age Limit (hidden by default) -->
             <div class="subdivision" id="ageLimitDiv" style="display: none;">
-                <p>Enter Age Limit (18 or 21):</p>
-                <input type="text" id="ageLimit" placeholder="Type 18 or 21">
+                <p>Enter Age Limit:</p>
+                <input type="text" id="ageLimit" placeholder="Type age">
             </div>
 
             <!-- Subdivision 5: Address Verification State Dropdown (hidden by default) -->
@@ -137,7 +137,7 @@
             elem.addEventListener('change', function() {
                 document.getElementById('aadharDropdown').style.display = 'none';
                 document.getElementById('panDropdown').style.display = 'none';
-                document.getElementById('vaccineDropdown').style.display = 'none';
+                // document.getElementById('vaccineDropdown').style.display = 'none';
                 document.getElementById('ageLimitDiv').style.display = 'none'; // Hide the age limit field
                 document.getElementById('stateDropdownDiv').style.display = 'none'; // Hide the state dropdown field
                 
@@ -145,9 +145,10 @@
                     document.getElementById('aadharDropdown').style.display = 'block';
                 } else if (this.value === 'PAN Card') {
                     document.getElementById('panDropdown').style.display = 'block';
-                } else if (this.value === 'Covid-19 Vaccination Certificate') {
-                    document.getElementById('vaccineDropdown').style.display = 'block';
                 }
+                // } else if (this.value === 'Covid-19 Vaccination Certificate') {
+                //     document.getElementById('vaccineDropdown').style.display = 'block';
+                // }
             });
         });
 

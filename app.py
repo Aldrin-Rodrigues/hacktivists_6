@@ -1,15 +1,3 @@
-# from flask import Flask, request, jsonify, render_template
-
-
-# app = Flask(__name__)
-
-# @app.route('/')
-# def home():
-#     return render_template('index.html')
-
-# if __name__ == '__main__':
-#     app.run(debug=True)
-
 from flask import Flask, request, jsonify, render_template
 import os
 import subprocess
@@ -31,6 +19,7 @@ def submit():
     selected_option = request.form.get('selectedOption')
     age_limit = request.form.get('ageLimit')
     selected_state = request.form.get('selectedState')
+    licenseOptions = request.form.get('licenseOptions')
     file = request.files.get('file')
 
     if file:
@@ -57,6 +46,12 @@ def submit():
             result = subprocess.run(['python', 'pancard.py', age_limit_str, file_path], capture_output=True, text=True)
             print(result.stdout)
             result_output = result.stdout
+            
+    elif document_type == 'Drivers License':
+        cov = str(licenseOptions)
+        result = subprocess.run(['python', 'dl.py', cov, file_path], capture_output=True, text=True)
+        print(result.stdout)
+        result_output = result.stdout
         
     # elif document_type == 'Covid-19 Vaccination Certificate':
     #     if selected_option == 'vaccineVerification':
@@ -68,6 +63,7 @@ def submit():
         'selectedOption': selected_option,
         'ageLimit': age_limit,
         'selectedState': selected_state,
+        'licenseOptions': licenseOptions,
         'fileName': file.filename if file else None
     }
     

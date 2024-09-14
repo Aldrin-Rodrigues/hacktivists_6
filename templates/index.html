@@ -27,9 +27,9 @@
                     <input type="radio" id="panBtn" name="document" value="PAN Card">
                     PAN Card
                 </label>
-                <label for="vaccineBtn">
-                    <input type="radio" id="vaccineBtn" name="document" value="Covid-19 Vaccination Certificate">
-                    Covid-19 Vaccination Certificate
+                <label for="licenseBtn">
+                    <input type="radio" id="licenseBtn" name="document" value="Drivers License">
+                    Drivers License
                 </label>
             </div>
             
@@ -40,7 +40,7 @@
                     <option value="select">Select an option</option>
                     <option value="age">Age Verification</option>
                     <option value="address">Address Verification</option>
-                    <option value="aadharNumber">Valid Aadhar Number</option>
+                    <!-- <option value="aadharNumber">Valid Aadhar Number</option> -->
                 </select>
             </div>
 
@@ -84,14 +84,19 @@
                 <select id="panOptions">
                     <option value="select">Select an option</option>
                     <option value="age">Age Verification</option>
-                    <option value="address">Address Verification</option>
+                    <!-- <option value="address">Address Verification</option> -->
                 </select>
             </div>
             
-            <div class="subdivision" id="vaccineDropdown" style="display: none;">
-                <p>Covid-19 Vaccination Certificate Options:</p>
-                <select id="vaccineOptions">
-                    <option value="vaccineVerification">Verify Covid-19 Vaccine</option>
+            <div class="subdivision" id="licenseDropdown" style="display: none;">
+                <p>Driver's License Options</p>
+                <select id="licenseOptions">
+                    <option value="select">Select an option</option>
+                    <option value="LMV">LMV</option>
+                    <option value="MCWG">MCWG</option>
+                    <option value="HMV">HMV</option>
+                    <option value="HTV">HTV</option>
+                    <option value="MCWOG">MCWOG</option>
                 </select>
             </div>          
 
@@ -103,8 +108,8 @@
 
             <!-- Subdivision 4: Age Limit (hidden by default) -->
             <div class="subdivision" id="ageLimitDiv" style="display: none;">
-                <p>Enter Age Limit (18 or 21):</p>
-                <input type="text" id="ageLimit" placeholder="Type 18 or 21">
+                <p>Enter Age Limit:</p>
+                <input type="text" id="ageLimit" placeholder="Type Age">
             </div>
 
             <!-- Subdivision 5: Address Verification State Dropdown (hidden by default) -->
@@ -136,7 +141,7 @@
             elem.addEventListener('change', function() {
                 document.getElementById('aadharDropdown').style.display = 'none';
                 document.getElementById('panDropdown').style.display = 'none';
-                document.getElementById('vaccineDropdown').style.display = 'none';
+                document.getElementById('licenseDropdown').style.display = 'none';
                 document.getElementById('ageLimitDiv').style.display = 'none'; // Hide the age limit field
                 document.getElementById('stateDropdownDiv').style.display = 'none'; // Hide the state dropdown field
                 
@@ -144,8 +149,8 @@
                     document.getElementById('aadharDropdown').style.display = 'block';
                 } else if (this.value === 'PAN Card') {
                     document.getElementById('panDropdown').style.display = 'block';
-                } else if (this.value === 'Covid-19 Vaccination Certificate') {
-                    document.getElementById('vaccineDropdown').style.display = 'block';
+                } else if (this.value === 'Drivers License') {
+                    document.getElementById('licenseDropdown').style.display = 'block';
                 }
             });
         });
@@ -177,11 +182,25 @@
         document.getElementById('submitBtn').addEventListener('click', function() {
             const documentType = document.querySelector('input[name="document"]:checked');
             const ageLimitInput = document.getElementById('ageLimit').value;
-            const selectedOption = (documentType && documentType.value === 'Aadhar Card') 
-                                    ? document.getElementById('aadharOptions').value 
-                                    : document.getElementById('panOptions').value;
+            let selectedOption = '';
+
+            // Determine which options dropdown to use based on document type
+            if (documentType) {
+                const docTypeValue = documentType.value;
+
+                if (docTypeValue === 'Aadhar Card') {
+                    selectedOption = document.getElementById('aadharOptions').value;
+                } else if (docTypeValue === 'PAN Card') {
+                    selectedOption = document.getElementById('panOptions').value;
+                } else if (docTypeValue === 'Drivers License') {
+                    selectedOption = document.getElementById('licenseOptions').value;
+                }
+            }
+
             const selectedState = document.getElementById('stateDropdown').value;
 
+                // Validation for the form submission
+        if (documentType && documentType.value === 'Aadhar Card') {
             if (selectedOption === 'age' && ageLimitInput === '') {
                 alert('Please enter the age limit.');
                 return;
@@ -189,6 +208,12 @@
                 alert('Please select a state for Address Verification.');
                 return;
             }
+        } else if (documentType && documentType.value === 'Drivers License') {
+            if (selectedOption === 'select') {
+                alert('Please select a license option.');
+                return;
+            }
+        }
 
             // Create a FormData object to send the file and other data
             const formData = new FormData();
