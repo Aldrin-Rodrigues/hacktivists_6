@@ -65,10 +65,10 @@ def check_age_requirement(dob, age_limit):
 
 def main():
     # data = ast.literal_eval(sys.argv[1])
-    # agelimit = sys.argv[1] 
-    # pdf_file = sys.argv[2]
-    pdf_file = "hitha_aadhar.pdf"
-    selected_state = "Karnataka"
+    selected_state = sys.argv[1] 
+    pdf_file = sys.argv[2]
+    # pdf_file = "hitha_aadhar.pdf"
+    # selected_state = "Karnataka"
     pages = convert_from_path(pdf_file, poppler_path='/opt/homebrew/Cellar/poppler/24.04.0_1/bin')
     
     pytesseract.pytesseract.tesseract_cmd = r'/opt/homebrew/bin/tesseract'
@@ -118,6 +118,8 @@ def main():
         # print("Address found:", address_match)  # Output the matched string
         if selected_state in address_match:
             print("Address validated.")
+        else:
+            print("Address not validated.")
     else:
         print("Address not found.")
     
