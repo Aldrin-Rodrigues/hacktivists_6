@@ -96,11 +96,11 @@ def main():
         # print("Number found:", number_match)  # Output the matched string
         number_match = number_match.replace(" ", "")
         number_match = number_match.strip()
-        output = validate_aadhar_number(number_match)
-        if "SUCCESS" in output:
-            pass
-        else:
-            print("Number not valid.")
+        # output = validate_aadhar_number(number_match)
+        # if "SUCCESS" in output:
+        #     pass
+        # else:
+        #     print("Number not valid.")
     else:
         print("Number not valid.")
            

@@ -32,28 +32,26 @@ def submit():
     file = request.files.get('file')
 
     if file:
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+        file.save(file_path)
 
     if document_type == 'Aadhar Card':
         if selected_option == 'age':
             age_limit_str = str(age_limit)
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
             result = subprocess.run(['python', 'aadhar_final_age.py', age_limit_str, file_path], capture_output=True, text=True)
             print(result.stdout)
         elif selected_option == 'address':
             selected_state = str(selected_state)
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
-            subprocess.run(['python', 'aadhar_final_address.py', selected_state, file_path])
+            result = subprocess.run(['python', 'aadhar_final_address.py', selected_state, file_path], capture_output=True, text=True)
+            print(result.stdout)
         # elif selected_option == 'aadharNumber':
             # subprocess.run(['python', 'aadhar_number_validation_script.py'])
 
     elif document_type == 'PAN Card':
         if selected_option == 'age':
             age_limit_str = str(age_limit)
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
             result = subprocess.run(['python', 'pancard.py', age_limit_str, file_path], capture_output=True, text=True)
             print(result.stdout)
-            
         
     # elif document_type == 'Covid-19 Vaccination Certificate':
     #     if selected_option == 'vaccineVerification':
@@ -67,7 +65,6 @@ def submit():
         'selectedState': selected_state,
         'fileName': file.filename if file else None
     }
-    
     
     print(response_data)
     return jsonify(response_data)
